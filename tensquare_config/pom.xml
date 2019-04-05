@@ -37,7 +37,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.13</version>
+                <version>1.0.0</version>
                 <configuration>
                     <image>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</image>
                     <newName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</newName>
@@ -53,6 +53,8 @@
                         </resource>
                     </resources>
                     <dockerHost>http://129.204.215.187:2375</dockerHost>
+                    <serverId>aliyun</serverId>
+                    <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
                 </configuration>
             </plugin>
         </plugins>
