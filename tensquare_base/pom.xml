@@ -46,6 +46,37 @@
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
     </dependencies>
-
+    <build>
+        <finalName>${artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!-- docker的maven插件，官网：
+            https://github.com/spotify/docker-maven-plugin -->
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <image>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</image>
+                    <newName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</newName>
+                    <imageName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</imageName>
+                    <baseImage>jdk1.8</baseImage>
+                    <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
+                    <forceTags>true</forceTags>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <dockerHost>http://129.204.215.187:2375</dockerHost>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

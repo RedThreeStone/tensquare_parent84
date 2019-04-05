@@ -31,9 +31,12 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>0.4.13</version>
                 <configuration>
+                    <image>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</image>
+                    <newName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</newName>
                     <imageName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</imageName>
-                    <baseImage>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/jdk1.8:newst</baseImage>
+                    <baseImage>jdk1.8</baseImage>
                     <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
+                    <forceTags>true</forceTags>
                     <resources>
                         <resource>
                             <targetPath>/</targetPath>
