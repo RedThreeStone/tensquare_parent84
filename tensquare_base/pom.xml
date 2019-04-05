@@ -60,7 +60,6 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.0.0</version>
                 <configuration>
-                    <serverId>aliyun</serverId>
                     <image>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</image>
                     <newName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</newName>
                     <imageName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</imageName>
@@ -75,6 +74,8 @@
                         </resource>
                     </resources>
                     <dockerHost>http://129.204.215.187:2375</dockerHost>
+                    <serverId>aliyun</serverId>
+                    <registryUrl>registry.cn-hangzhou.aliyuncs.com</registryUrl>
                 </configuration>
             </plugin>
         </plugins>
