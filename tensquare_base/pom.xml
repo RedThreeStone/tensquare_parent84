@@ -61,6 +61,8 @@
                 <version>1.0.0</version>
                 <configuration>
                     <serverId>docker-aliyun</serverId>
+                    <image>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</image>
+                    <newName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</newName>
                     <imageName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</imageName>
                     <baseImage>jdk1.8</baseImage>
                     <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
