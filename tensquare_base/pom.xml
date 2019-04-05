@@ -59,6 +59,7 @@
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
                 <configuration>
+                    <serverId>docker-aliyun</serverId>
                     <imageName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</imageName>
                     <baseImage>jdk1.8</baseImage>
                     <entryPoint>["java", "-jar","/${project.build.finalName}.jar"]</entryPoint>
