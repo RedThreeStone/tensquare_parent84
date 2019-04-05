@@ -60,7 +60,7 @@
                 <artifactId>docker-maven-plugin</artifactId>
                 <version>1.0.0</version>
                 <configuration>
-                    <serverId>docker-aliyun</serverId>
+                    <serverId>aliyun</serverId>
                     <image>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</image>
                     <newName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</newName>
                     <imageName>registry.cn-hangzhou.aliyuncs.com/lei-tensquare/${project.artifactId}:${project.version}</imageName>
