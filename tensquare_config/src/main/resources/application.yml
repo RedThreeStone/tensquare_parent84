@@ -6,12 +6,12 @@ spring:
       server:
         git:
           uri: https://gitee.com/RedThreeStone/tensquere-config.git
-  rabbitmq:
-    host: 129.204.215.187
+#  rabbitmq:
+#    host: 129.204.215.187
 server:
   port: 12000
-management:
-  endpoints:
-    web:
-      exposure:
-        include: bus-refresh
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: bus-refresh
