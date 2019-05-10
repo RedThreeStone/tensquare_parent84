@@ -26,7 +26,6 @@ public class LabelService {
 
     @Autowired
     private IdWorker idWorker;
-
     public void save(Label label) {
         label.setId(idWorker.nextId()+"");
         labelDao.save(label);

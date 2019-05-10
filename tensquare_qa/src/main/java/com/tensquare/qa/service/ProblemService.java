@@ -1,6 +1,8 @@
 package com.tensquare.qa.service;
 
+import com.tensquare.qa.client.BaseClient;
 import com.tensquare.qa.dao.ProblemDao;
+import com.tensquare.qa.pojo.Label;
 import com.tensquare.qa.pojo.Problem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -32,6 +34,9 @@ public class ProblemService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+	@Autowired
+    private BaseClient baseClient;
 
 	public Page<Problem> newlist(String labelid, int page, int size){
 		Pageable pageable = PageRequest.of(page-1, size);
@@ -98,6 +103,16 @@ public class ProblemService {
 		problem.setId( idWorker.nextId()+"" );
 		problemDao.save(problem);
 	}
+    public void lxcTestAdd(Problem problem) {
+        problem.setId( idWorker.nextId()+"" );
+        problemDao.save(problem);
+        Label label=new Label();
+        label.setCount(11L);
+        label.setFans(12L);
+        label.setLabelname("啊啊啊测试数据哦");
+        baseClient.save(label);
+
+    }
 
 	/**
 	 * 修改

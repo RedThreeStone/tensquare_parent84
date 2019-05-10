@@ -5,3 +5,9 @@ spring:
       profile: dev
       label: master
       uri: http://127.0.0.1:12000
+tx-lcn:
+  client:
+    manager-address: 127.0.0.1:7970
+logging:
+  level:
+    root: debug

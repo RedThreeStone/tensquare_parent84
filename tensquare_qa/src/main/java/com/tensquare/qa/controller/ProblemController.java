@@ -1,4 +1,5 @@
 package com.tensquare.qa.controller;
+
 import com.tensquare.qa.client.BaseClient;
 import com.tensquare.qa.pojo.Problem;
 import com.tensquare.qa.service.ProblemService;
@@ -10,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Map;
 /**
  * 控制器层
@@ -29,6 +31,16 @@ public class ProblemController {
 
 	@Autowired
 	private BaseClient baseClient;
+
+	@RequestMapping(value = "/lxcTest")
+	public Result LxcTest(String hasError){
+		Problem problem=new Problem();
+		problem.setContent("我是内容");
+		problem.setCreatetime(new Date());
+		problem.setNickname("啦啦啦");
+		problemService.lxcTestAdd(problem);
+		return new Result(true,StatusCode.OK,"保存成功");
+	}
 
 	@RequestMapping(value = "/label/{labelId}", method = RequestMethod.GET)
 	public Result findByLabelId(@PathVariable String labelId){
