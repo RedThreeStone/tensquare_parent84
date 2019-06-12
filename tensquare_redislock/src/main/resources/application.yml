@@ -1,0 +1,9 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: tensquare-redislock
+  redis:
+    host: 129.204.172.72
+    password: leige666
+    database: 0

@@ -24,6 +24,8 @@
         <module>tensquare_manager</module>
         <module>tensquare_web</module>
         <module>tensquare_config</module>
+        <module>dwadsa</module>
+        <module>tensquare_redislock</module>
     </modules>
     <packaging>pom</packaging>
 

@@ -2,6 +2,7 @@
 <project version="4">
   <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dwadsa" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_article" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_base" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_common" charset="UTF-8" />
@@ -14,6 +15,7 @@
     <file url="file://$PROJECT_DIR$/tensquare_qa" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_rabbitmqtest" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_recruit" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/tensquare_redislock" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_search" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_sms" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/tensquare_spit" charset="UTF-8" />
