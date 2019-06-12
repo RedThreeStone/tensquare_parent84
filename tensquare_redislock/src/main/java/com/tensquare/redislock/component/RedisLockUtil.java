@@ -3,8 +3,11 @@ package com.tensquare.redislock.component;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
+import org.springframework.data.redis.core.script.RedisScript;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -45,12 +48,33 @@ public class RedisLockUtil {
 //        redisScript.setResultType(Integer.class);
 //        redisTemplate.execute(redisScript, Collections.singletonList(key), value);
         // 判断加锁与解锁是不是同一个客户端
-        if (value.equals(redisTemplate.opsForValue().get(key))) {
-            // 若在此时，这把锁突然不是这个客户端的，则会误解锁
-            redisTemplate.delete(key);
-            System.out.println("释放锁成功");
-        }
+//        if (value.equals(redisTemplate.opsForValue().get(key))) {
+//            // 若在此时，这把锁突然不是这个客户端的，则会误解锁
+//            redisTemplate.delete(key);
+//            System.out.println("释放锁成功");
+//        }
+        String script = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
+        RedisScript<Long> redisScript = new DefaultRedisScript<>(script,Long.class);
+
+        Object result = redisTemplate.execute(redisScript, Collections.singletonList(key), value);
 
         return true;
     }
+//    public static ReturnType fromJavaType(@Nullable Class&lt;?&gt; javaType) {
+//
+//        if (javaType == null) {
+//            return ReturnType.STATUS;
+//        }
+//        if (javaType.isAssignableFrom(List.class)) {
+//            return ReturnType.MULTI;
+//        }
+//        if (javaType.isAssignableFrom(Boolean.class)) {
+//            return ReturnType.BOOLEAN;
+//        }
+//        if (javaType.isAssignableFrom(Long.class)) {
+//            return ReturnType.INTEGER;
+//        }
+//        return ReturnType.VALUE;
+//    }
+
 }

@@ -14,7 +14,7 @@ public class LockTestController {
 
 
     @RequestMapping(value = "/lockTest")
-    @NoRepeatSubmit(ttl = 10000)
+    @NoRepeatSubmit(ttl = 10)
     public String lockTest(){
         return "请求成功";
     }
