@@ -1,5 +1,5 @@
 server:
-  port: 9001
+  port: 9002
 spring:
   application:
     name: tensquare-redislock
@@ -7,3 +7,12 @@ spring:
     host: 129.204.172.72
     password: leige666
     database: 0
+    lettuce:
+      pool:
+        max-wait: 5000
+        max-active: 30
+        max-idle: 30
+        min-idle: 12
+logging:
+  level:
+    root: debug

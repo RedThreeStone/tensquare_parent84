@@ -14,8 +14,12 @@ public class LockTestController {
 
 
     @RequestMapping(value = "/lockTest")
-    @NoRepeatSubmit(ttl = 10)
+    @NoRepeatSubmit(ttl = 21)
     public String lockTest(){
+        long startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis()-startTime<40*1000){
+
+        }
         return "请求成功";
     }
 }

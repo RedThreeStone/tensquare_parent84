@@ -1,18 +1,19 @@
 package com.tensquare.redislock.aop;
 
 import com.tensquare.redislock.anno.NoRepeatSubmit;
-import com.tensquare.redislock.component.RedisLockUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
+import org.redisson.api.RLock;
+import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Administrator
@@ -23,8 +24,9 @@ import java.util.UUID;
 @Component
 public class RepeatSubmitAspect {
 
+
     @Autowired
-    private RedisLockUtil redisLockUtil;
+    private RedissonClient redissonClient;
 
     @Pointcut("@annotation(com.tensquare.redislock.anno.NoRepeatSubmit)")
     public void pointCut(){
@@ -37,24 +39,30 @@ public class RepeatSubmitAspect {
         String userId="111";
         String methodName = joinPoint.getSignature().getName();
         String key = userId+"_"+methodName;
-        String value = UUID.randomUUID().toString();
         MethodSignature signature = (MethodSignature)joinPoint.getSignature();
         NoRepeatSubmit noRepeatSubmit = signature.getMethod().getAnnotation(NoRepeatSubmit.class);
         long ttl = noRepeatSubmit.ttl();
-        if(redisLockUtil.lock(key,value,ttl)){
-            logger.info("成功拿到锁"+key);
+        //获取锁对象
+        RLock lock = redissonClient.getLock(key);
+        if(lock.tryLock(1,TimeUnit.SECONDS)){
             Object o=null;
             try {
                 o = joinPoint.proceed();
+                return o;
             }catch (Exception e){
                 throw  e;
             }finally {
-                redisLockUtil.unlock(key, value);
+                try {
+                    lock.unlock();
+                }catch (Exception e){
+                    logger.error("释放锁出错",e);
+                    throw new RuntimeException("释放锁出错");
+                }
             }
-            return o;
+
         }else {
             logger.info("未获取到锁"+key);
-            return "重复提交,拒绝请求";
+            throw new RuntimeException("重复提交,拒绝请求") ;
         }
     }
 }
